@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-styles/element-styles/paper-material-styles.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="page-home">
+	<template>
+		<style is="custom-style" include="paper-material-styles iron-flex iron-flex-alignment">
+			:host {
+				display: block;
+				padding: 10px;
+                width: inherit;
+			}
+
+            .content-main{
+                width: inherit;
+                margin: auto;
+            }
+
+            .content-paper{
+                width: 500px;
+                height: 200px;
+            }
+            .paper-material {
+                padding: 16px;
+                margin: 0 16px;
+                display: inline-block;
+            }
+		</style>
+
+		<div class="content-main">
+            <div class="paper-material content-paper" elevation="2">
+                <h2>testing...</h2>
+            </div>
+        </div>
+
+	</template>
+
+	<script>
+		class PageHome extends Polymer.Element {
+			static get is() {
+				return 'page-home';
+			}
+		}
+
+		window.customElements.define(PageHome.is, PageHome);
+	</script>
+</dom-module>

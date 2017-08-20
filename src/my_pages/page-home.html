@@ -1,6 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<link rel="import" href="../../bower_components/paper-styles/element-styles/paper-material-styles.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../my-icons.html">
+
+<!-- Styling imports -->
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../shared-styles.html">
 
@@ -9,62 +13,111 @@
 		<style is="custom-style" include="paper-material-styles iron-flex iron-flex-alignment">
 			:host {
 				display: block;
-				padding: 60px 10px 10px 10px;
+				margin: 32px 0 16px 0;
                 width: inherit;
 
 				@apply(--layout-vertical);
 				@apply(--layout-center-center);
 			}
 
+			hr{
+				width: 100%;
+				display: block;
+				border-width: 1px;
+				opacity: 0.5;
+			}
+
             .content-main{
-				max-width: 800px;
+				max-width: var(--content-max-width);
 
 				@apply(--layout-flex);
 				@apply(--layout-horizontal);
 				@apply(--layout-wrap);
             }
 
-            .content-paper{
-                width: 800px;
-                height: 500px;
-				margin: 16px 16px;
-			}
             .paper-material {
                 padding: 16px;
                 margin: 16px;
-				border-radius: 2px;
-                display: inline-block;
-				background: white;
+
+				@apply(--paper-material-basic);
             }
+
 			.card-heading{
-				@apply(--paper-font-title);
 				color: var(--app-primary-color);
+
+				@apply(--paper-font-title);
 			}
 
-			.small-card{
-				height: 200px;
-				max-width: 55%;
+			.separator-text{
+				width: 100%;
+				color: var(--paper-grey-500);
+
+				@apply(--paper-font-headline);
+			}
+
+			.project-card{
+				margin: 16px;
+				min-width: 300px;
+
+				--paper-card-header-color: white;
+				--paper-card-actions: {
+					color: var(--app-icon-button-color-gray);
+				};
+
+				@apply(--layout-flex);
+			}
+
+			.about-card{
+				height: 400px;
+
+				@apply(--layout-flex);
+			}
+
+			.separator{
+				width: 100%;
+				margin: 14px 16px 0 16px;
+				color: var(--paper-grey-500);
+			}
+
+			paper-icon-button{
+				color: var(--paper-grey-500);
 			}
 		</style>
 
 		<div class="content-main">
-            <div class="paper-material content-paper" elevation="2">
-                <div class="card-heading">testing...</div>
+            <div class="paper-material about-card" elevation="2">
+                <div class="card-heading">Welcome</div>
             </div>
 
-			<div class="paper-material small-card flex" elevation="2">
-				<div class="card-heading">Backup Manager for LINE</div>
+			<div class="separator">
+				<div class="separator-text">My projects</div>
+				<hr/>
 			</div>
 
-			<div class="paper-material small-card flex" elevation="2">
-				<div class="card-heading">UiO Courses</div>
-			</div>
+			<paper-card class="project-card" heading="Backup Manager for LINE" image="../../images/backup-manager-promo.png"
+						elevation="2">
+				<div class="card-actions">
+					<a href="https://play.google.com/store/apps/details?id=no.wunderapps.linebackuprestore" tabindex="-1">
+						<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
+					</a>
+				</div>
+			</paper-card>
+
+			<paper-card class="project-card" heading="UiO Courses" image="../../images/uio-courses-promo.png"
+						elevation="2">
+				<div class="card-actions">
+					<a href="https://play.google.com/store/apps/details?id=no.wunderapps.uiocourses" tabindex="-1">
+						<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
+					</a>
+				</div>
+			</paper-card>
         </div>
 
 	</template>
 
 	<script>
 		class PageHome extends Polymer.Element {
+
 			static get is() {
 				return 'page-home';
 			}

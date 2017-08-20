@@ -19,6 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="my-icons.html">
 
@@ -32,10 +33,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="my-app">
 	<template>
-		<style>
+		<style is="custom-style" include="iron-flex">
 			:host {
-				--app-primary-color: var(--paper-indigo-500);
+				--app-primary-color: var(--paper-deep-purple-800);
 				--app-secondary-color: black;
+
+				--app-font-title-color: var(--app-primary-color);
+
+				--app-icon-button-color-gray: var(--paper-grey-600);
+
+				--app-font-opacity-primary: 0.9;
+				--app-font-opacity-secondary: 0.7;
+
+				--content-max-width: 900px;
 
 				display: block;
 			}
@@ -50,13 +60,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 
 			app-toolbar{
-				height: 64px;
+				height: 58px;
+				max-width: var(--content-max-width);
+				margin: auto;
 			}
 
 			app-header.second-header{
 				width: 100%;
-				height: 300px;
+				height: 250px;
 				position: absolute;
+			}
+
+			paper-icon-button{
+				height: 26px;
+				width: 26px;
+				opacity: var(--app-font-opacity-primary);
+				color: white;
+				padding: 4px;
+			}
+
+			.toolbar-icon-layout{
+
+			}
+			.toolbar-layout{
+				padding: 0 32px 0 32px;
+
+				@apply(--layout-flex);
+				@apply(--layout-horizontal);
+				@apply(--layout-center);
+			}
+			.toolbar-title{
+				opacity: var(--app-font-opacity-primary);
+
+				@apply(--paper-font-display1);
+				font-size: 27px;
+			}
+			.toolbar-subtitle{
+				opacity: var(--app-font-opacity-secondary);
+
+				@apply(--paper-font-subhead);
 			}
 		</style>
 
@@ -72,8 +114,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			<app-header-layout has-scrolling-region>
 
 				<app-header slot="header" condenses reveals effects="waterfall">
-					<app-toolbar>
-						<div main-title>My App</div>
+					<app-toolbar class="flex">
+
+						<div class="toolbar-layout" top-item>
+							<div class="toolbar-title flex">Frode Standal</div>
+							<div class="toolbar-icon-layout">
+								<a href="https://play.google.com/store/apps/dev?id=9140513140852778070" tabindex="-1">
+									<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
+								</a>
+								<a href="https://www.youtube.com/channel/UCEWqArYvW3fMzMPPBnDb8nQ?view_as=subscriber" tabindex="-1">
+									<paper-icon-button icon="my-icons:social-youtube"></paper-icon-button>
+								</a>
+								<paper-icon-button icon="my-icons:social-flickr"></paper-icon-button>
+								<paper-icon-button icon="my-icons:social-fb"></paper-icon-button>
+							</div>
+						</div>
+
+						<div class="toolbar-layout" bottom-item>
+							<div class="toolbar-subtitle flex">Front-end developer</div>
+							<div class="toolbar-subtitle">+4797635958</div>
+						</div>
+
 					</app-toolbar>
 				</app-header>
 				<app-header class="second-header"></app-header>

@@ -10,11 +10,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../bower_components/paper-styles/element-styles/paper-material-styles.html">
 <!-- shared styles for all views -->
-<dom-module id="shared-styles">
-	<template>
-		<style>
+<custom-style is="custom-style">
+	<style>
+		html{
+			--paper-material-basic: {
+				border-radius: 2px;
+				display: inline-block;
+				background: white;
+			};
 
-        </style>
-	</template>
-</dom-module>
+			--card-title-font: {
+				@apply(--paper-font-title);
+				color: var(--app-primary-color);
+			}
+		}
+	</style>
+</custom-style>

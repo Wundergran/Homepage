@@ -1,0 +1,17 @@
+{
+  "en": {
+    "contact_full_name": "Frode Standal",
+    "contact_phone": "+4797635958",
+    "contact_description": "Front-end developer",
+
+    "home_about_title": "Welcome",
+    "home_about_body1": "I'm a front-end developer from Norway, and got my bachelor's degree in \"Design, use and interaction\" from the University of Oslo in 2017. I Started developing for Android back in 2014, and I currently have 2 Android applications published on Google Play Store. Designing clean and efficient interfaces with high usability is a passion of mine, and so far material design has been my favourite way of achieving this.",
+    "home_about_body2": "I have other interests as well besides coding, where photography, mountain biking and FPV Racing drones are my top 3.",
+
+    "home_my_projects": "My Projects",
+
+    "app_uio_courses": "UiO Courses",
+    "app_linebackuprestore": "Backup Manager for LINE"
+
+  }
+}

@@ -7,7 +7,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
+<!-- Elements/General -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -23,11 +23,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="my-icons.html">
 
+<!-- Behaviors -->
 <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
 
+<!-- Styles -->
 <link rel="import" href="../bower_components/paper-styles/typography.html">
 <link rel="import" href="../bower_components/paper-styles/color.html">
 
+<!-- Pages -->
 <link rel="lazy-import" href="my_pages/page-home.html">
 <link rel="lazy-import" href="my-view404.html">
 
@@ -39,11 +42,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				--app-secondary-color: black;
 
 				--app-font-title-color: var(--app-primary-color);
-
-				--app-icon-button-color-gray: var(--paper-grey-600);
-
 				--app-font-opacity-primary: 0.9;
 				--app-font-opacity-secondary: 0.7;
+
+				--app-icon-button-color-gray: var(--paper-grey-600);
 
 				--content-max-width: 900px;
 
@@ -72,11 +74,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 
 			paper-icon-button{
-				height: 26px;
-				width: 26px;
+				height: 32px;
+				width: 32px;
 				opacity: var(--app-font-opacity-primary);
 				color: white;
-				padding: 4px;
+				padding: 6px;
+				margin: 2px 4px;
 			}
 
 			.toolbar-icon-layout{
@@ -94,11 +97,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 				@apply(--paper-font-display1);
 				font-size: 27px;
+				font-weight: bold;
 			}
 			.toolbar-subtitle{
 				opacity: var(--app-font-opacity-secondary);
 
 				@apply(--paper-font-subhead);
+				font-weight: lighter;
+				font-style: italic;
 			}
 		</style>
 
@@ -117,7 +123,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<app-toolbar class="flex">
 
 						<div class="toolbar-layout" top-item>
-							<div class="toolbar-title flex">Frode Standal</div>
+							<div class="toolbar-title flex">{{localize('contact_full_name')}}</div>
 							<div class="toolbar-icon-layout">
 								<a href="https://play.google.com/store/apps/dev?id=9140513140852778070" tabindex="-1">
 									<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
@@ -132,7 +138,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 						<div class="toolbar-layout" bottom-item>
 							<div class="toolbar-subtitle flex">Front-end developer</div>
-							<div class="toolbar-subtitle">+4797635958</div>
+							<div class="toolbar-subtitle">{{localize('contact_phone')}}</div>
 						</div>
 
 					</app-toolbar>
@@ -145,7 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						fallback-selection="view404"
 						role="main">
 
-					<page-home class="page" name="home"></page-home>
+					<page-home class="page" name="home" language="{{language}}" resources="{{resources}}"></page-home>
 
 				</iron-pages>
 			</app-header-layout>
@@ -153,7 +159,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	</template>
 
 	<script>
-        class MyApp extends Polymer.Element {
+        class MyApp extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
             static get is() {
                 return 'my-app';
             }
@@ -170,6 +176,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     // This shouldn't be neccessary, but the Analyzer isn't picking up
                     // Polymer.Element#rootPath
                     rootPath: String,
+					language: {
+                        value: 'en'
+					}
                 };
             }
 
@@ -179,11 +188,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 ];
             }
 
-            static get behaviors(){
-                return [
-                    Polymer.AppLocalizeBehavior
-				]
-			}
+            ready() {
+                super.ready();
+                this.loadResources(this.resolveUrl('locales.json'));
+            }
 
             _routePageChanged(page) {
                 // If no page was found in the route data, page will be an empty string.

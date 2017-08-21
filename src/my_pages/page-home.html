@@ -2,9 +2,13 @@
 
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../my-icons.html">
 
-<!-- Styling imports -->
+<!-- Behaviors -->
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<!-- Style -->
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../shared-styles.html">
 
@@ -13,7 +17,7 @@
 		<style is="custom-style" include="paper-material-styles iron-flex iron-flex-alignment">
 			:host {
 				display: block;
-				margin: 32px 0 16px 0;
+				margin: 164px 0 16px 0;
                 width: inherit;
 
 				@apply(--layout-vertical);
@@ -68,8 +72,6 @@
 			}
 
 			.about-card{
-				height: 400px;
-
 				@apply(--layout-flex);
 			}
 
@@ -82,19 +84,54 @@
 			paper-icon-button{
 				color: var(--paper-grey-500);
 			}
+
+			.circle-image{
+				position: absolute;
+				height: 164px;
+				width: 164px;
+				padding: 5px;
+				border-radius: 164px;
+
+				top: -152px;
+				left: 0;
+				right: 0;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			.profile-picture{
+				height: inherit;
+				width: inherit;
+			}
+
+			.text-container{
+
+			}
+			.text-body{
+				margin-top: 16px;
+				opacity: var(--app-font-opacity-primary);
+				@apply(--paper-font-body1);
+			}
 		</style>
 
 		<div class="content-main">
-            <div class="paper-material about-card" elevation="2">
-                <div class="card-heading">Welcome</div>
+			<div class="paper-material about-card" elevation="2">
+				<div class="paper-material circle-image" elevation="2">
+					<iron-image class="profile-picture" src="../../images/frode_profile.png" sizing="cover"></iron-image>
+				</div>
+
+                <div class="card-heading">{{localize('home_about_title')}}</div>
+				<div class="text-container">
+					<div class="text-body">{{localize('home_about_body1')}}</div>
+					<div class="text-body">{{localize('home_about_body2')}}</div>
+				</div>
             </div>
 
 			<div class="separator">
-				<div class="separator-text">My projects</div>
+				<div class="separator-text">{{localize('home_my_projects')}}</div>
 				<hr/>
 			</div>
 
-			<paper-card class="project-card" heading="Backup Manager for LINE" image="../../images/backup-manager-promo.png"
+			<paper-card class="project-card" heading="{{localize('app_linebackuprestore')}}" image="../../images/backup-manager-promo.png"
 						elevation="2">
 				<div class="card-actions">
 					<a href="https://play.google.com/store/apps/details?id=no.wunderapps.linebackuprestore" tabindex="-1">
@@ -103,7 +140,7 @@
 				</div>
 			</paper-card>
 
-			<paper-card class="project-card" heading="UiO Courses" image="../../images/uio-courses-promo.png"
+			<paper-card class="project-card" heading="{{localize('app_uio_courses')}}" image="../../images/uio-courses-promo.png"
 						elevation="2">
 				<div class="card-actions">
 					<a href="https://play.google.com/store/apps/details?id=no.wunderapps.uiocourses" tabindex="-1">
@@ -116,7 +153,7 @@
 	</template>
 
 	<script>
-		class PageHome extends Polymer.Element {
+		class PageHome extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior],Polymer.Element) {
 
 			static get is() {
 				return 'page-home';

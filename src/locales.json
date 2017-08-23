@@ -6,7 +6,7 @@
 
     "home_about_title": "Welcome",
     "home_about_body1": "I'm a front-end developer from Norway, and got my bachelor's degree in \"Informatics: Design, use and interaction\" from the University of Oslo in 2017. I started developing for Android back in 2014, and I currently have 2 Android applications published on Google Play Store. Designing clean and efficient interfaces with high usability is a passion of mine, and so far material design has been my favourite way of achieving this.",
-    "home_about_body2": "FPV Racing drones are another hobby of mine, and I enjoy making videos of my flights which I upload to Youtube. I also enjoy photography, and my favourites gets uploaded to my Flickr page. Feel free to check out my pages.",
+    "home_about_body2": "Flying FPV Racing drones is another hobby of mine, and I enjoy making videos of my flights which I upload to Youtube. I also enjoy photography, and my favourites gets uploaded to my Flickr page. Feel free to check out my pages.",
 
     "home_my_projects": "My Projects",
 
@@ -21,6 +21,7 @@
     "url_flickr": "https://www.flickr.com/photos/frodestandal",
     "url_facebook": "https://www.facebook.com/frodestandal94",
     "url_youtube": "https://www.youtube.com/channel/UCEWqArYvW3fMzMPPBnDb8nQ?view_as=subscriber",
+    "url_github": "https://github.com/Wundergran",
 
     "flickr": "Flickr",
     "youtube": "Youtube",

@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../my-icons.html">
 
 <!-- Behaviors -->
@@ -30,6 +31,10 @@
 				border-width: 1px;
 				opacity: 0.5;
 			}
+			a{
+				text-decoration: none;
+				height: auto;
+			}
 
             .content-main{
 				max-width: var(--content-max-width);
@@ -54,9 +59,10 @@
 
 			.separator-text{
 				width: 100%;
-				color: var(--paper-grey-500);
+				color: var(--app-icon-button-color-gray);
 
 				@apply(--paper-font-headline);
+				font-size: 20px;
 			}
 
 			.project-card{
@@ -72,17 +78,19 @@
 			}
 
 			.about-card{
+				padding-bottom: 0;
 				@apply(--layout-flex);
 			}
 
-			.separator{
+			.separator-layout{
 				width: 100%;
 				margin: 14px 16px 0 16px;
 				color: var(--paper-grey-500);
 			}
 
-			paper-icon-button{
+			.card-icon-button{
 				color: var(--paper-grey-500);
+				opacity: var(--app-font-opacity-primary);
 			}
 
 			.circle-image{
@@ -111,12 +119,28 @@
 				opacity: var(--app-font-opacity-primary);
 				@apply(--paper-font-body1);
 			}
+
+			.card-button-layout{
+				width: inherit;
+				margin-top: 8px;
+				@apply(--layout-horizontal);
+				@apply(--layout-end-justified);
+			}
+			.card-button{
+				color: var(--app-primary-color);
+				margin: 8px;
+
+				@apply(--paper-font-button);
+			}
+			.card-button:hover{
+				@apply(--shadow-elevation-4dp);
+			}
 		</style>
 
 		<div class="content-main">
 			<div class="paper-material about-card" elevation="2">
-				<div class="paper-material circle-image" elevation="2">
-					<iron-image class="profile-picture" src="../../images/frode_profile.png" sizing="cover"></iron-image>
+				<div class="paper-material circle-image" elevation="1">
+					<iron-image class="profile-picture" src="../../images/frode_profile.png" sizing="cover" preload fade></iron-image>
 				</div>
 
                 <div class="card-heading">{{localize('home_about_title')}}</div>
@@ -124,9 +148,20 @@
 					<div class="text-body">{{localize('home_about_body1')}}</div>
 					<div class="text-body">{{localize('home_about_body2')}}</div>
 				</div>
+				<div class="card-button-layout flex">
+					<a href="{{localize('url_flickr')}}" tabindex="-1">
+						<paper-button class="card-button">{{localize('flickr')}}</paper-button>
+					</a>
+					<a href="{{localize('url_youtube')}}" tabindex="-1">
+						<paper-button class="card-button">{{localize('youtube')}}</paper-button>
+					</a>
+					<a href="{{localize('url_facebook')}}" tabindex="-1">
+						<paper-button class="card-button">{{localize('facebook')}}</paper-button>
+					</a>
+				</div>
             </div>
 
-			<div class="separator">
+			<div class="separator-layout">
 				<div class="separator-text">{{localize('home_my_projects')}}</div>
 				<hr/>
 			</div>
@@ -135,7 +170,7 @@
 						elevation="2">
 				<div class="card-actions">
 					<a href="https://play.google.com/store/apps/details?id=no.wunderapps.linebackuprestore" tabindex="-1">
-						<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
+						<paper-icon-button class="card-icon-button" icon="my-icons:social-play-store"></paper-icon-button>
 					</a>
 				</div>
 			</paper-card>
@@ -144,7 +179,7 @@
 						elevation="2">
 				<div class="card-actions">
 					<a href="https://play.google.com/store/apps/details?id=no.wunderapps.uiocourses" tabindex="-1">
-						<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
+						<paper-icon-button class="card-icon-button" icon="my-icons:social-play-store"></paper-icon-button>
 					</a>
 				</div>
 			</paper-card>

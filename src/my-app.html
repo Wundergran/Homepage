@@ -21,6 +21,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="my-icons.html">
 
 <!-- Behaviors -->
@@ -57,10 +59,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				background-color: var(--app-primary-color);
 			}
 
-			app-header paper-icon-button {
-				--paper-icon-button-ink-color: white;
-			}
-
 			app-toolbar{
 				height: 58px;
 				max-width: var(--content-max-width);
@@ -73,18 +71,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				position: absolute;
 			}
 
-			paper-icon-button{
+			paper-icon-button.toolbar-icon-button{
 				height: 32px;
 				width: 32px;
 				opacity: var(--app-font-opacity-primary);
 				color: white;
 				padding: 6px;
 				margin: 2px 4px;
+
+				--paper-icon-button-ink-color: white;
 			}
 
-			.toolbar-icon-layout{
-
-			}
 			.toolbar-layout{
 				padding: 0 32px 0 32px;
 
@@ -94,6 +91,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 			.toolbar-title{
 				opacity: var(--app-font-opacity-primary);
+				white-space: nowrap;
+				overflow: hidden;
 
 				@apply(--paper-font-display1);
 				font-size: 27px;
@@ -101,6 +100,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 			.toolbar-subtitle{
 				opacity: var(--app-font-opacity-secondary);
+				white-space: nowrap;
+				overflow: hidden;
 
 				@apply(--paper-font-subhead);
 				font-weight: lighter;
@@ -111,7 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
 		<app-route
 				route="{{route}}"
-				pattern="[[rootPath]]:page"
+				pattern="/:page"
 				data="{{routeData}}"
 				tail="{{subroute}}"></app-route>
 
@@ -121,23 +122,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 				<app-header slot="header" condenses reveals effects="waterfall">
 					<app-toolbar class="flex">
-
 						<div class="toolbar-layout" top-item>
 							<div class="toolbar-title flex">{{localize('contact_full_name')}}</div>
 							<div class="toolbar-icon-layout">
-								<a href="https://play.google.com/store/apps/dev?id=9140513140852778070" tabindex="-1">
-									<paper-icon-button icon="my-icons:social-play-store"></paper-icon-button>
+								<a href="{{localize('url_play_store')}}" tabindex="-1">
+									<paper-icon-button class="toolbar-icon-button" icon="my-icons:social-play-store"></paper-icon-button>
 								</a>
-								<a href="https://www.youtube.com/channel/UCEWqArYvW3fMzMPPBnDb8nQ?view_as=subscriber" tabindex="-1">
-									<paper-icon-button icon="my-icons:social-youtube"></paper-icon-button>
+								<a href="{{localize('url_youtube')}}" tabindex="-1">
+									<paper-icon-button class="toolbar-icon-button" icon="my-icons:social-github"></paper-icon-button>
 								</a>
-								<paper-icon-button icon="my-icons:social-flickr"></paper-icon-button>
-								<paper-icon-button icon="my-icons:social-fb"></paper-icon-button>
 							</div>
 						</div>
 
 						<div class="toolbar-layout" bottom-item>
-							<div class="toolbar-subtitle flex">Front-end developer</div>
+							<div class="toolbar-subtitle flex">{{localize('contact_description')}}</div>
 							<div class="toolbar-subtitle">{{localize('contact_phone')}}</div>
 						</div>
 
@@ -146,7 +144,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<app-header class="second-header"></app-header>
 
 				<iron-pages
-						selected="[[page]]"
+						selected="[[routeData.page]]"
 						attr-for-selected="name"
 						fallback-selection="view404"
 						role="main">
@@ -154,6 +152,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<page-home class="page" name="home" language="{{language}}" resources="{{resources}}"></page-home>
 
 				</iron-pages>
+
+
+
+				<paper-dialog id="dialog404" class="error-dialog">
+					<h2>{{localize('err_404_header')}}</h2>
+					<div class="text-body">{{localize('err_404_desc')}}</div>
+					<div class="buttons">
+						<paper-button on-click="dismiss404Dialog" dialog-confirm autofocus>{{localize('err_404_action_home')}}</paper-button>
+					</div>
+				</paper-dialog>
+
 			</app-header-layout>
 		</app-drawer-layout>
 	</template>
@@ -184,7 +193,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             static get observers() {
                 return [
-                    '_routePageChanged(routeData.page)',
+                    '_routePageChanged(routeData.page)'
                 ];
             }
 
@@ -194,24 +203,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             _routePageChanged(page) {
-                // If no page was found in the route data, page will be an empty string.
-                // Deault to 'view1' in that case.
-                this.page = page || 'home';
-            }
+                //Website currently only has one page, will be changed
+                if(this.routeData.page === ""){
+                    this.set('routeData.page', "home");
+                    return; //Return because method will be called again because of property change.
+                }
 
-            _pageChanged(page) {
                 // Load page import on demand. Show 404 page if fails
-                var resolvedPageUrl = this.resolveUrl('my_pages/page-' + page + '.html');
+                var resolvedPageUrl = this.resolveUrl('my_pages/page-' + this.routeData.page + '.html');
                 Polymer.importHref(
                     resolvedPageUrl,
                     null,
-                    this._showPage404.bind(this),
+                    this._showPageNotFound.bind(this),
                     true);
             }
 
-            _showPage404() {
-                this.page = 'view404';
+            _showPageNotFound() {
+                var dialog = this.$.dialog404;
+                dialog.open();
+                dialog.addEventListener('iron-overlay-canceled', this.dismiss404Dialog.bind(this));
             }
+
+            dismiss404Dialog(){
+                this.set('routeData.page', 'home');
+			}
         }
 
         window.customElements.define(MyApp.is, MyApp);

@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="my-icons.html">
 
 <!-- Behaviors -->
@@ -107,6 +108,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				font-weight: lighter;
 				font-style: italic;
 			}
+			paper-dialog{
+				border-radius: 2px;
+			}
 		</style>
 
 		<app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
@@ -154,7 +158,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				</iron-pages>
 
 
-
 				<paper-dialog id="dialog404" class="error-dialog">
 					<h2>{{localize('err_404_header')}}</h2>
 					<div class="text-body">{{localize('err_404_desc')}}</div>
@@ -175,18 +178,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             static get properties() {
                 return {
-                    page: {
-                        type: String,
-                        reflectToAttribute: true,
-                        observer: '_pageChanged',
-                    },
                     routeData: Object,
                     subroute: String,
                     // This shouldn't be neccessary, but the Analyzer isn't picking up
                     // Polymer.Element#rootPath
                     rootPath: String,
 					language: {
-                        value: 'en'
+                        value: 'en-US'
 					}
                 };
             }
@@ -199,18 +197,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             ready() {
                 super.ready();
+                this.setLanguage(navigator.language);
                 this.loadResources(this.resolveUrl('locales.json'));
             }
 
+            //Sets language, defaults to English if language does not exist
+            setLanguage(lang){
+                switch (lang){
+					case 'en-US':
+					    this.set('language', lang);
+					    break;
+
+					case 'no-NB':
+                        this.set('language', lang);
+					    break;
+
+					default:
+					    this.set('language', 'en-US');
+					    break;
+				}
+			}
+
             _routePageChanged(page) {
                 //Website currently only has one page, will be changed
-                if(this.routeData.page === ""){
+                if(page === ""){
                     this.set('routeData.page', "home");
-                    return; //Return because method will be called again because of property change.
+                    return; //Return because method will be called again due to property change.
                 }
 
                 // Load page import on demand. Show 404 page if fails
-                var resolvedPageUrl = this.resolveUrl('my_pages/page-' + this.routeData.page + '.html');
+                var resolvedPageUrl = this.resolveUrl('my_pages/page-' + page + '.html');
                 Polymer.importHref(
                     resolvedPageUrl,
                     null,
@@ -220,6 +236,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             _showPageNotFound() {
                 var dialog = this.$.dialog404;
+                console.log("Error, page not found");
                 dialog.open();
                 dialog.addEventListener('iron-overlay-canceled', this.dismiss404Dialog.bind(this));
             }

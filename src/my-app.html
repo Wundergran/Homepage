@@ -24,6 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="my-icons.html">
 
 <!-- Behaviors -->
@@ -83,6 +84,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				--paper-icon-button-ink-color: white;
 			}
 
+			paper-fab#language-fab{
+				position: absolute;
+				top: 57px;
+				right: -84px;
+			}
+
 			.toolbar-layout{
 				padding: 0 32px 0 32px;
 
@@ -107,6 +114,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				@apply(--paper-font-subhead);
 				font-weight: lighter;
 				font-style: italic;
+			}
+
+			.content-container{
+				position: relative;
+				display: block;
+				margin: auto;
+				max-width: var(--content-max-width);
 			}
 			paper-dialog{
 				border-radius: 2px;
@@ -147,15 +161,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				</app-header>
 				<app-header class="second-header"></app-header>
 
-				<iron-pages
-						selected="[[routeData.page]]"
-						attr-for-selected="name"
-						fallback-selection="view404"
-						role="main">
+				<div class="content-container">
+					<iron-pages
+							selected="[[routeData.page]]"
+							attr-for-selected="name"
+							fallback-selection="view404"
+							role="main">
 
-					<page-home class="page" name="home" language="{{language}}" resources="{{resources}}"></page-home>
+						<page-home class="page" name="home" language="{{language}}" resources="{{resources}}"></page-home>
 
-				</iron-pages>
+					</iron-pages>
+
+					<paper-fab id="language-fab" icon="icons:language"></paper-fab>
+				</div>
 
 
 				<paper-dialog id="dialog404" class="error-dialog">

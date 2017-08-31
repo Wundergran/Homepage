@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<!--Behaviors-->
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<!-- Experimental stuff -->
+<dom-module id="language-fab">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+
+			paper-fab{
+				display: block;
+			}
+			paper-fab[hidden]{
+				display: none;
+			}
+
+			paper-listbox{
+
+			}
+			paper-listbox[hidden]{
+
+			}
+		</style>
+
+			<paper-fab id="fab" icon="icons:language" on-tap="{{open}}"></paper-fab>
+			<paper-listbox id="listbox" name="listbox" hidden>
+				<paper-item id="langEng">English</paper-item>
+				<paper-item id="langNo">Norwegian</paper-item>
+			</paper-listbox>
+
+	</template>
+
+	<script>
+        Polymer({
+            is: 'language-fab',
+
+            behaviors: [
+                Polymer.AppLocalizeBehavior
+            ],
+
+            properties: {
+                language: String,
+				opened: Boolean
+			},
+
+			open: function (e) {
+                console.log("tap!");
+				document.getElementById('fab').setAttribute('hidden', 'true');
+            }
+        });
+	</script>
+</dom-module>

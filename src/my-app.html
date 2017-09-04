@@ -173,7 +173,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 					</iron-pages>
 
-					<language-fab></language-fab>
+					<language-fab language={{language}} resources="[[resources]]"></language-fab>
 				</div>
 
 
@@ -202,9 +202,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     // This shouldn't be neccessary, but the Analyzer isn't picking up
                     // Polymer.Element#rootPath
                     rootPath: String,
-					language: {
-                        value: 'en-US'
-					}
+					language: String
                 };
             }
 

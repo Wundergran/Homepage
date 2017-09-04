@@ -7,10 +7,22 @@
 <!--Behaviors-->
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 
+<!--Styles-->
+<link rel="import" href="../shared-styles.html">
+
 <!-- Experimental stuff -->
 <dom-module id="language-fab">
 	<template>
-		<style>
+		<style is="custom-style" include="paper-material-styles">
+			
+			@keyframes listbox {
+				from{
+					opacity: 0;
+				}
+				to{
+					opacity: 100;
+				}
+			}
 			:host {
 				display: block;
 			}
@@ -23,17 +35,21 @@
 			}
 
 			paper-listbox{
-
+				display: block;
+				animation-name: listbox;
+				animation-duration: 0.5s;
 			}
 			paper-listbox[hidden]{
-
+				display: none;
 			}
 		</style>
 
-			<paper-fab id="fab" icon="icons:language" on-tap="{{open}}"></paper-fab>
-			<paper-listbox id="listbox" name="listbox" hidden>
-				<paper-item id="langEng">English</paper-item>
-				<paper-item id="langNo">Norwegian</paper-item>
+			<paper-fab id="fab" icon="icons:language" on-tap="open" hidden="[[isOpen]]"></paper-fab>
+			<paper-listbox id="listbox" name="listbox" class="paper-material" elevation="3" hidden="[[!isOpen]]"
+						   attr-for-selected="lang" selected="{{language}}">
+
+				<paper-item id="langEng" lang="en-US" on-tap="close">{{localize('lang_eng')}}</paper-item>
+				<paper-item id="langNo" lang="no-NB" on-tap="close">{{localize('lang_nor')}}</paper-item>
 			</paper-listbox>
 
 	</template>
@@ -47,14 +63,35 @@
             ],
 
             properties: {
-                language: String,
-				opened: Boolean
+				isOpen: {
+                    type: Boolean,
+					value: false
+				},
+				language: {
+				    notify: true,
+					type: String
+				}
 			},
 
 			open: function (e) {
-                console.log("tap!");
-				document.getElementById('fab').setAttribute('hidden', 'true');
-            }
+                this.set('isOpen', true);
+                this.$.listbox.focus();
+            },
+
+			close: function (e) {
+				this.set('isOpen', false);
+            },
+			//listens for focus change, hides listbox when user interacts with a different element
+            ready: function (e) {
+				this.$.listbox.addEventListener('focused-changed', this._focusChanged.bind(this));
+            },
+			//Invoked when listbox's focus changes
+            _focusChanged: function (e){
+				console.log("focus changed");
+				if(!this.$.listbox.focused){
+				    this.close();
+				}
+			}
         });
 	</script>
 </dom-module>

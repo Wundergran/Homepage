@@ -25,7 +25,42 @@
 
     "flickr": "Flickr",
     "youtube": "Youtube",
-    "facebook": "Facebook"
+    "facebook": "Facebook",
 
+    "lang_eng": "English",
+    "lang_nor": "Norwegian"
+
+  },
+
+  "no-NB": {
+    "contact_full_name": "Frode Standal",
+    "contact_phone": "+4797635958",
+    "contact_description": "Front-end utvikler",
+
+    "home_about_title": "Velkommen",
+    "home_about_body1": "Jeg er en front-end utvikler fra norge, og fikk min bachelor i \"Informatics: Design, use and interaction\" fra Universitetet i Oslo i 2017. Jeg startet med å utvikle for Android i 2014, og jeg har for øyeblikket 2 Android apper ute på Google Play Store. Det å designe rene sider med høy brukbarhet er en lidenskap jeg har, og for nå har Googles \"Material design\" vært min favoritt for å oppnå dette.",
+    "home_about_body2": "En annen hobby jeg har er å fly FPV Racingdroner, og jeg liker godt å lage videoer av flyvningene mine som jeg laster opp på YouTube-kanalen min. Jeg liker også å ta bilder, og de beste legger jeg på min Flickr-side. Ta gjerne en titt på det!",
+
+    "home_my_projects": "Mine prosjekter",
+
+    "app_uio_courses": "UiO Courses",
+    "app_linebackuprestore": "Backup Manager for LINE",
+
+    "err_404_header": "Siden finnes ikke",
+    "err_404_desc": "Denne siden finnes ikke, hvordan kom du deg hit?",
+    "err_404_action_home": "Til hjemmesiden",
+
+    "url_play_store": "https://play.google.com/store/apps/dev?id=9140513140852778070",
+    "url_flickr": "https://www.flickr.com/photos/frodestandal",
+    "url_facebook": "https://www.facebook.com/frodestandal94",
+    "url_youtube": "https://www.youtube.com/channel/UCEWqArYvW3fMzMPPBnDb8nQ?view_as=subscriber",
+    "url_github": "https://github.com/Wundergran",
+
+    "flickr": "Flickr",
+    "youtube": "Youtube",
+    "facebook": "Facebook",
+
+    "lang_eng": "Engelsk",
+    "lang_nor": "Norsk"
   }
 }

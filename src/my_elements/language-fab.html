@@ -18,9 +18,11 @@
 			@keyframes listbox {
 				from{
 					opacity: 0;
+					background-color: var(--app-accent-color);
 				}
 				to{
 					opacity: 100;
+					background-color: white;
 				}
 			}
 			:host {
@@ -28,6 +30,7 @@
 			}
 
 			paper-fab{
+				--paper-fab-background: var(--app-accent-color);
 				display: block;
 			}
 			paper-fab[hidden]{
@@ -86,7 +89,7 @@
 				this.$.listbox.addEventListener('focused-changed', this._focusChanged.bind(this));
             },
 			//Invoked when listbox's focus changes
-            _focusChanged: function (e){
+            _focusChanged: function (){
 				console.log("focus changed");
 				if(!this.$.listbox.focused){
 				    this.close();

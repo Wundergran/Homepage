@@ -56,10 +56,11 @@
 
 			.separator-text{
 				width: 100%;
+				margin: 14px 16px 0 16px;
 				color: var(--app-icon-button-color-gray);
 
 				@apply(--paper-font-headline);
-				font-size: 20px;
+				font-weight: 100;
 			}
 
 			.project-card{
@@ -77,12 +78,6 @@
 			.about-card{
 				padding-bottom: 0;
 				@apply(--layout-flex);
-			}
-
-			.separator-layout{
-				width: 100%;
-				margin: 14px 16px 0 16px;
-				color: var(--paper-grey-500);
 			}
 
 			.card-icon-button{
@@ -158,10 +153,7 @@
 				</div>
             </div>
 
-			<div class="separator-layout">
-				<div class="separator-text">{{localize('home_my_projects')}}</div>
-				<hr/>
-			</div>
+			<div class="separator-text">{{localize('home_my_projects')}}</div>
 
 			<paper-card class="project-card" heading="{{localize('app_linebackuprestore')}}" image="../../images/backup-manager-promo.png"
 						elevation="2">

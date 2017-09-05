@@ -30,6 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!-- Behaviors -->
 <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
 
 <!-- Styles -->
 <link rel="import" href="../bower_components/paper-styles/typography.html">
@@ -42,9 +43,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="my-app">
 	<template>
 		<style is="custom-style" include="iron-flex">
+
 			:host {
 				--app-primary-color: var(--paper-deep-purple-800);
 				--app-secondary-color: black;
+				--app-accent-color: var(--paper-light-blue-a700);
 
 				--app-font-title-color: var(--app-primary-color);
 				--app-font-opacity-primary: 0.9;
@@ -89,6 +92,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				position: absolute;
 				top: 57px;
 				right: -84px;
+			}
+
+			language-fab[narrow = "true"]{
+				position: fixed;
+				top: inherit;
+				right: 32px;
+				bottom: 32px;
 			}
 
 			.toolbar-layout{
@@ -173,7 +183,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 					</iron-pages>
 
-					<language-fab language={{language}} resources="[[resources]]"></language-fab>
+					<language-fab id="languageFab" language={{language}} resources="[[resources]]"></language-fab>
 				</div>
 
 
@@ -190,7 +200,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	</template>
 
 	<script>
-        class MyApp extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
+        class MyApp extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior, Polymer.IronResizableBehavior], Polymer.Element) {
             static get is() {
                 return 'my-app';
             }
@@ -216,6 +226,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 super.ready();
                 this.setLanguage(navigator.language);
                 this.loadResources(this.resolveUrl('locales.json'));
+
+                this.addEventListener('iron-resize', this._onPageResize.bind(this));
             }
 
             //Sets language, defaults to English if language does not exist
@@ -257,6 +269,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 dialog.open();
                 dialog.addEventListener('iron-overlay-canceled', this.dismiss404Dialog.bind(this));
             }
+
+            _onPageResize() {
+
+                //If page width < 1100px, put fab at the bottom
+				if(window.innerWidth < 1100){
+					this.$.languageFab.setAttribute('narrow', true);
+				}else{
+                    this.$.languageFab.setAttribute('narrow', false);
+				}
+			}
 
             dismiss404Dialog(){
                 this.set('routeData.page', 'home');

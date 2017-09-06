@@ -14,17 +14,6 @@
 <dom-module id="language-fab">
 	<template>
 		<style is="custom-style" include="paper-material-styles">
-			
-			@keyframes listbox {
-				from{
-					opacity: 0;
-					background-color: var(--app-accent-color);
-				}
-				to{
-					opacity: 100;
-					background-color: white;
-				}
-			}
 			:host {
 				display: block;
 			}
@@ -39,16 +28,24 @@
 
 			paper-listbox{
 				display: block;
-				animation-name: listbox;
-				animation-duration: 0.5s;
+				height: auto;
+				width: auto;
+				opacity: 1;
+				background-color: white;
+
+				transition: opacity 0.5s, background-color 0.5s;
 			}
 			paper-listbox[hidden]{
-				display: none;
+				height: 0;
+				width: 0;
+				opacity: 0;
+				background-color: var(--app-accent-color);
+				overflow: hidden;
 			}
 		</style>
 
 			<paper-fab id="fab" icon="icons:language" on-tap="open" hidden="[[isOpen]]"></paper-fab>
-			<paper-listbox id="listbox" name="listbox" class="paper-material" elevation="3" hidden="[[!isOpen]]"
+			<paper-listbox id="listbox" name="listbox" class="paper-material" elevation="5" hidden="[[!isOpen]]"
 						   attr-for-selected="lang" selected="{{language}}">
 
 				<paper-item id="langEng" lang="en-US" on-tap="close">{{localize('lang_eng')}}</paper-item>
@@ -86,8 +83,10 @@
             },
 			//listens for focus change, hides listbox when user interacts with a different element
             ready: function (e) {
-				this.$.listbox.addEventListener('focused-changed', this._focusChanged.bind(this));
+                var listbox = this.$.listbox;
+                listbox.addEventListener('focused-changed', this._focusChanged.bind(this));
             },
+
 			//Invoked when listbox's focus changes
             _focusChanged: function (){
 				console.log("focus changed");

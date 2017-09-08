@@ -28,7 +28,8 @@
     "facebook": "Facebook",
 
     "lang_eng": "English",
-    "lang_nor": "Norwegian"
+    "lang_nor": "Norwegian",
+    "lang_ja": "Japanese"
 
   },
 
@@ -61,6 +62,40 @@
     "facebook": "Facebook",
 
     "lang_eng": "Engelsk",
-    "lang_nor": "Norsk"
+    "lang_nor": "Norsk",
+    "lang_ja": "Japansk"
+  },
+
+  "ja-JP": {
+    "contact_full_name": "Frode Standal",
+    "contact_phone": "+4797635958",
+    "contact_description": "フロントエンド　ディベロッパー",
+
+    "home_about_title": "ようこそ",
+    "home_about_body1": "初めまして。私はノルウェー人のフロントエンドデベロッパーです。\nオスロ大学にて情報科学を専攻し、2017年夏に卒業しました。\n\n私は2014年、アンドロイド向けにプログラミングを開始しました。\nそして現在、2つのアンドロイド向けアプリケーションを開発しGoogle play storeにて公表中です。\n\n分かりやすいデザインと効率的なインターフェイス、使い易さが私の心掛けているポイントです。\nこれまでのところ、マテリアルデザインを使用することで、それが可能になっています。",
+    "home_about_body2": "FPVレーシングドローンが私の趣味の一つです。ビデオを撮り編集してyoutubeにアップしています。\n写真撮影も好きでいくつかFlickr pageにアップしているので、是非ご覧ください。",
+
+    "home_my_projects": "開発したアプリ",
+
+    "app_uio_courses": "UiO Courses",
+    "app_linebackuprestore": "Backup Manager for LINE",
+
+    "err_404_header": "お探しのページが見つかりません。",
+    "err_404_desc": "ページを離れますか？",
+    "err_404_action_home": "Homeへ戻る",
+
+    "url_play_store": "https://play.google.com/store/apps/dev?id=9140513140852778070",
+    "url_flickr": "https://www.flickr.com/photos/frodestandal",
+    "url_facebook": "https://www.facebook.com/frodestandal94",
+    "url_youtube": "https://www.youtube.com/channel/UCEWqArYvW3fMzMPPBnDb8nQ?view_as=subscriber",
+    "url_github": "https://github.com/Wundergran",
+
+    "flickr": "Flickr",
+    "youtube": "Youtube",
+    "facebook": "Facebook",
+
+    "lang_eng": "English",
+    "lang_nor": "Norwegian",
+    "lang_ja": "日本語"
   }
 }

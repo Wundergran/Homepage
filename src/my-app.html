@@ -232,18 +232,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             //Sets language, defaults to English if language does not exist
             setLanguage(lang){
-                switch (lang){
-					case 'en-US':
-					    this.set('language', lang);
-					    break;
 
-					case 'no-NB':
-                        this.set('language', lang);
-					    break;
-
-					default:
-					    this.set('language', 'en-US');
-					    break;
+                if(lang === 'en-US' || lang === 'no-NB' || lang === 'ja-JP'){
+                    this.set('language', lang);
+				}else{
+                    this.set('language', 'en-US');
 				}
 			}
 

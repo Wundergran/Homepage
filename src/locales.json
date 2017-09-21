@@ -28,8 +28,8 @@
     "facebook": "Facebook",
 
     "lang_eng": "English",
-    "lang_nor": "Norwegian",
-    "lang_ja": "Japanese"
+    "lang_nor": "Norsk",
+    "lang_ja": "日本語"
 
   },
 
@@ -63,7 +63,7 @@
 
     "lang_eng": "Engelsk",
     "lang_nor": "Norsk",
-    "lang_ja": "Japansk"
+    "lang_ja": "日本語"
   },
 
   "ja-JP": {
@@ -95,7 +95,7 @@
     "facebook": "Facebook",
 
     "lang_eng": "English",
-    "lang_nor": "Norwegian",
+    "lang_nor": "Norsk",
     "lang_ja": "日本語"
   }
 }
